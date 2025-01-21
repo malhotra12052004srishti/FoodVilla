@@ -33,22 +33,22 @@ const Body = () => {
   async function getRestaurants() {
     try {
       const data = await fetch(
-        // "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.717111&lng=77.157598&page_type=DESKTOP_WEB_LISTING"
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        // "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.717111&lng=77.157598&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await data.json();
       console.log(json);
       // Optional chaining
       setAllRestaurants(
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setFilteredRestaurants(
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       console.log(
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
     } catch (error) {
