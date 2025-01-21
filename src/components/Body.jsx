@@ -3,11 +3,17 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 
+// function filterData(searchInput, restaurants) {
+//   const filterData = restaurants.filter((a) =>
+//     a?.data?.name?.toLowerCase()?.includes(searchInput.toLowerCase())
+//   );
+//   return filterData;
+// }
+
 function filterData(searchInput, restaurants) {
-  const filterData = restaurants.filter((a) =>
-    a?.data?.name?.toLowerCase()?.includes(searchInput.toLowerCase())
+  return restaurants.filter((restaurant) =>
+    restaurant?.info?.name?.toLowerCase()?.includes(searchInput.toLowerCase())
   );
-  return filterData;
 }
 
 const Body = () => {
@@ -33,11 +39,10 @@ const Body = () => {
   async function getRestaurants() {
     try {
       const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        // "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.717111&lng=77.157598&page_type=DESKTOP_WEB_LISTING"
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await data.json();
-      console.log(json);
+      // console.log(json);
       // Optional chaining
       setAllRestaurants(
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
@@ -47,10 +52,10 @@ const Body = () => {
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
-      console.log(
+      /*console.log(
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
-      );
+      );*/
     } catch (error) {
       console.log("Error fetching restaurants: ", error);
     }
@@ -62,12 +67,61 @@ const Body = () => {
   // If my restaurants array is not empty then => Show the list of restaurants
 
   // Not rendered : Early return
+
+  console.log("allRestaurants", allRestaurants);
+
+  console.log("Length", allRestaurants.length);
+
   if (!allRestaurants) {
     return <h1>OOPS!!! There are no restaurants.</h1>;
   }
   if (filteredRestaurants?.length === 0) {
     return <h1>No Restaurants match your Search</h1>;
   }
+  // return allRestaurants.length === 0 ? (
+  //   <Shimmer />
+  // ) : (
+  //   <>
+  //     <div className="search-container">
+  //       <input
+  //         type="text"
+  //         className="search-input"
+  //         placeholder="Search"
+  //         value={searchInput}
+  //         onChange={(e) => {
+  //           // e.target.value => whatever you write in the input
+  //           setSearchInput(e.target.value);
+  //         }}
+  //       />
+  //       <button
+  //         className="search-btn"
+  //         onClick={() => {
+  //           const data = filterData(searchInput, allRestaurants);
+  //           // update the filteredRestaurants
+  //           setFilteredRestaurants(data);
+  //         }}
+  //       >
+  //         Search
+  //       </button>
+  //     </div>
+
+  //     <div className="restaurant-list">
+  //       {allRestaurants.length > 0 ? (
+  //         // Logic for No restraurants found here
+  //         filteredRestaurants.map((e) => {
+  //           if (e.data) {
+  //             return <RestaurantCard {...e.data} key={e.data.id} />;
+  //           } else {
+  //             console.log("No data found");
+  //             return null;
+  //           }
+  //         })
+  //       ) : (
+  //         <h1>No data found</h1>
+  //       )}
+  //     </div>
+  //   </>
+  // );
   return allRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -78,16 +132,12 @@ const Body = () => {
           className="search-input"
           placeholder="Search"
           value={searchInput}
-          onChange={(e) => {
-            // e.target.value => whatever you write in the input
-            setSearchInput(e.target.value);
-          }}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
         <button
           className="search-btn"
           onClick={() => {
             const data = filterData(searchInput, allRestaurants);
-            // update the filteredRestaurants
             setFilteredRestaurants(data);
           }}
         >
@@ -96,18 +146,12 @@ const Body = () => {
       </div>
 
       <div className="restaurant-list">
-        {allRestaurants.length > 0 ? (
-          // Logic for No restraurants found here
-          filteredRestaurants.map((e) => {
-            if (e.data) {
-              return <RestaurantCard {...e.data} key={e.data.id} />;
-            } else {
-              console.log("No data found");
-              return null;
-            }
-          })
+        {filteredRestaurants?.length > 0 ? (
+          filteredRestaurants.map((restaurant) => (
+            <RestaurantCard {...restaurant.info} key={restaurant.info.id} />
+          ))
         ) : (
-          <h1>No data found</h1>
+          <h1>No Restaurants match your Search</h1>
         )}
       </div>
     </>
