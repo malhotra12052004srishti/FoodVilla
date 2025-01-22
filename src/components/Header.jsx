@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logo from "../assets/images/logo.png";
 const loggedInUser = () => {
   // API call to authenticate the user
   return false;
@@ -9,7 +10,8 @@ const Title = () => (
     <img
       className="logo"
       alt="logo"
-      src="https://yt3.ggpht.com/ytc/AKedOLSpK3T_2RxkMYb-pk9oENQB0NvYpeOdXRgQe8i5=s800-c-k-c0x00ffffff-no-rj"
+      // src="https://yt3.ggpht.com/ytc/AKedOLSpK3T_2RxkMYb-pk9oENQB0NvYpeOdXRgQe8i5=s800-c-k-c0x00ffffff-no-rj"
+      src = {logo}
     />
   </a>
 );

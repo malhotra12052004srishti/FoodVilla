@@ -21,9 +21,10 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  // Empty dependency array => once after the render.
+  // Empty dependency array "[]" => once after the initial render.
   // dependency array is [searchInput] => once after initial render + everytime after render(my searchInput changes).
   // dependency array is [restaurants] => just called once after initial call and will be called if my restaurants will be changed.
+  // If we don't pass the dependency array then it (useEffect) will be called after every render.
 
   // useEffect(() => {
   //     console.log("useEffect")
@@ -38,9 +39,8 @@ const Body = () => {
 
   async function getRestaurants() {
     try {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING://www.swiggy.com/dapi/restaurants/list/v5?lat=30.5160865&lng=76.6597776&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
+      // The API is fetching the data from the server and returning the response but if the response is not coming just change the API URL as the logic behind the API is correct.
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.900965&lng=75.8572758&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data.json();
       // console.log(json);
       // Optional chaining
@@ -60,7 +60,6 @@ const Body = () => {
       console.log("Error fetching restaurants: ", error);
     }
   }
-  console.log("render");
 
   // Conditional rendering
   // If my restaurants array is empty then => Shimmer UI
