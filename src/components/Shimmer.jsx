@@ -3,13 +3,11 @@ import "./Shimmer.css";
 
 const Shimmer = () => {
   return (
-    <div data-testid="shimmer" className="flex flex-wrap">
-      {Array(15)
+    <div className="restraunt-list">
+      {Array(12)
         .fill("")
-        .map((_, index) => (
-          <div key={index} className="h-60 w-60 bg-gray-200 m-5 p-5 rounded-lg">
-            {" "}
-          </div>
+        .map((e, index) => (
+          <div key={index} className="shimmer-card"></div>
         ))}
     </div>
   );

@@ -40,7 +40,9 @@ const Body = () => {
   async function getRestaurants() {
     try {
       // The API is fetching the data from the server and returning the response but if the response is not coming just change the API URL as the logic behind the API is correct.
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.900965&lng=75.8572758&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.900965&lng=75.8572758&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
       const json = await data.json();
       // console.log(json);
       // Optional chaining
@@ -74,9 +76,7 @@ const Body = () => {
   if (!allRestaurants) {
     return <h1>OOPS!!! There are no restaurants.</h1>;
   }
-  if (filteredRestaurants?.length === 0) {
-    return <h1>No Restaurants match your Search</h1>;
-  }
+
   // return allRestaurants.length === 0 ? (
   //   <Shimmer />
   // ) : (
