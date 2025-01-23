@@ -1,5 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
+
 const loggedInUser = () => {
   // API call to authenticate the user
   return false;
@@ -11,7 +13,7 @@ const Title = () => (
       className="logo"
       alt="logo"
       // src="https://yt3.ggpht.com/ytc/AKedOLSpK3T_2RxkMYb-pk9oENQB0NvYpeOdXRgQe8i5=s800-c-k-c0x00ffffff-no-rj"
-      src = {logo}
+      src={logo}
     />
   </a>
 );
@@ -31,9 +33,22 @@ const Header = () => {
 
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          {/* Link is just similar to the <a> tag */}
+          {/* <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/about">
+            <li>About Us</li>
+          </Link> */}
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>

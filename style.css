@@ -46,3 +46,12 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.i1{
+    height: 400px;
+    width: 400px;
+}
+
+.menu {
+    display: flex;
+}
