@@ -11,7 +11,7 @@ const loggedInUser = () => {
 const Title = () => (
   <a href="/">
     <img
-      className="logo"
+      className="h-28 p-2 transition-transform duration-300 hover:scale-105"
       alt="logo"
       // src="https://yt3.ggpht.com/ytc/AKedOLSpK3T_2RxkMYb-pk9oENQB0NvYpeOdXRgQe8i5=s800-c-k-c0x00ffffff-no-rj"
       src={logo}
@@ -22,19 +22,29 @@ const Title = () => (
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isOffline = useOffline();
-  const title = "Food Villa";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [title, setTitle] = useState("FoodVilla");
   return (
-    <div className="header">
+    <div className="flex flex-col md:flex-row justify-between items-center bg-blue-300 shadow-lg p-4">
       <Title />
-      <h1>{title}</h1>
+
+      <button
+        className="md:hidden text-white focus:outline-none"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {isMenuOpen ? "✖️" : "☰"}
+      </button>
 
       {/* Just for understanding about useState */}
       {/* <h1>{title}</h1>
             <button onClick={() => setTitle("New Food App")}>Change Title</button> */}
 
-      <div className="nav-items">
-        <ul>
+      <div
+        className={`flex-col md:flex md:flex-row ${
+          isMenuOpen ? "flex" : "hidden"
+        } md:flex`}
+      >
+        <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
           {/* Link is just similar to the <a> tag */}
           {/* <Link to="/">
             <li>Home</li>
@@ -42,19 +52,21 @@ const Header = () => {
           <Link to="/about">
             <li>About Us</li>
           </Link> */}
-          <li>
+          <li className="text-white hover:text-blue-500 transition-colors">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="text-white hover:text-blue-500 transition-colors">
             <Link to="/about">About Us</Link>
           </li>
-          <li>
+          <li className="text-white hover:text-blue-500 transition-colors">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li>
+          <li className="text-white hover:text-blue-500 transition-colors">
             <Link to="/instamart">Instamart</Link>
           </li>
-          <li>Cart</li>
+          <li className="text-white hover:text-blue-500 transition-colors">
+            <Link to="/cart">Cart</Link>
+          </li>
         </ul>
       </div>
 
@@ -70,12 +82,26 @@ const Header = () => {
               ((a=10), console.log(a));
       */}
 
-      <h1>{isOffline ? "❌" : "✔️"}</h1>
-      {isLoggedIn ? (
-        <button onClick={() => setIsLoggedIn(false)}>LogOut</button>
-      ) : (
-        <button onClick={() => setIsLoggedIn(true)}>Login</button>
-      )}
+<div className="flex items-center space-x-4 mt-4 md:mt-0">
+        <h1 className={`text-2xl ${isOffline ? "text-red-500" : "text-green-500"}`}>
+          {/* {isOffline ? "❌" : "✔️"} */}
+        </h1>
+        {isLoggedIn ? (
+          <button 
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors" 
+            onClick={() => setIsLoggedIn(false)}
+          >
+            LogOut
+          </button>
+        ) : (
+          <button 
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors" 
+            onClick={() => setIsLoggedIn(true)}
+          >
+            Login
+          </button>
+        )}
+      </div>
     </div>
   );
 };

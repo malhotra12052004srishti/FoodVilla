@@ -23,38 +23,60 @@ const RestaurantMenu = () => {
   }
 
   return (
-    <div className="menu">
-      <div>
-        <h1>Restaurant id : {id}</h1>
-        {/* <h1>Restaurant id  {resId}</h1> */}
-        <h2>{restaurant?.cards[2]?.card?.card?.info?.name}</h2>
-        <img
-          className="i1"
-          src={
-            IMG_CDN_URL +
-            restaurant?.cards[2]?.card?.card?.info?.cloudinaryImageId
-          }
-        />
-        <h3>{restaurant?.cards[2]?.card?.card?.info?.areaName}</h3>
-        <h3>{restaurant?.cards[2]?.card?.card?.info?.city}</h3>
-        <h3>{restaurant?.cards[2]?.card?.card?.info?.avgRating + " stars"}</h3>
-        <h3>{restaurant?.cards[2]?.card?.card?.info?.costForTwoMessage}</h3>
-      </div>
-      <div>
-        <h1>Menu</h1>
-        <ul>
-          {restaurant?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards ? (
-            Object.values(
-              restaurant.cards[4].groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
-                (e) =>
-                  e.card?.card?.["@type"] ===
-                  "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-              )
-            ).map((item, index) => <li key={index}>{item.card.card.title}</li>)
-          ) : (
-            <li>No menu available</li>
-          )}
-        </ul>
+    <div className="flex-wrap">
+      <div className="p-5 bg-gray-100 min-h-screen">
+        <div className="bg-white shadow-md rounded-lg p-5 mb-5">
+          <h1 className="text-2xl font-bold mb-2">Restaurant ID : {id}</h1>
+          {/* <h1>Restaurant id  {resId}</h1> */}
+          <h2 className="text-xl font-semibold mb-2">
+            {restaurant?.cards[2]?.card?.card?.info?.name}
+          </h2>
+          <img
+            className="rounded-md h-48 w-48 object-cover mb-2"
+            src={
+              IMG_CDN_URL +
+              restaurant?.cards[2]?.card?.card?.info?.cloudinaryImageId
+            }
+          />
+          <h3 className="text-gray-700">
+            {restaurant?.cards[2]?.card?.card?.info?.areaName}
+          </h3>
+          <h3 className="text-gray-700">
+            {restaurant?.cards[2]?.card?.card?.info?.city}
+          </h3>
+          <h3 className="text-gray-700">
+            {restaurant?.cards[2]?.card?.card?.info?.avgRating + " stars"}
+          </h3>
+          <h3 className="text-gray-700">
+            {restaurant?.cards[2]?.card?.card?.info?.costForTwoMessage}
+          </h3>
+          <p className="text-gray-700">
+            {restaurant?.cards[2]?.card?.card?.info?.description}
+          </p>
+        </div>
+        <div className="bg-white shadow-md rounded-lg p-5">
+          <h1 className="text-2xl font-bold mb-4">Menu</h1>
+          <ul className="space-y-2">
+            {restaurant?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards ? (
+              Object.values(
+                restaurant.cards[4].groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+                  (e) =>
+                    e.card?.card?.["@type"] ===
+                    "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+                )
+              ).map((item, index) => (
+                <li
+                  key={index}
+                  className="bg-blue-100 p-2 rounded-md shadow-sm"
+                >
+                  {item.card.card.title}
+                </li>
+              ))
+            ) : (
+              <li className="text-gray-500">No menu available</li>
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );

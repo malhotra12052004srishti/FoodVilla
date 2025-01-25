@@ -5,9 +5,9 @@ import { Component } from "react";
 
 const About2 = () => {
   return (
-    <div>
-      <h1>About Us Page</h1>
-      <p>
+    <div className="p-5 bg-gray-100 min-h-screen">
+      <h1 className="text-3xl font-bold mb-4">About Us Page</h1>
+      <p className="text-lg mb-6">
         This is the FoodVilla Website. We provide the best food in the town.
       </p>
       {/* <Outlet /> */}
@@ -34,15 +34,17 @@ class About extends Component {
         <p>
           This is the FoodVilla Website. We provide the best food in the town.
         </p>
-        <ProfileClass name={"First Child"} />
-        {/* <ProfileClass name={"Second Child"} /> */}
-        {/* <ProfileFunctional name={"Srishti Malhotra learning Functional Components"} /> */}
+        <div className="space-y-4">
+          <ProfileClass name={"First Child"} />
+          {/* <ProfileClass name={"Second Child"} /> */}
+          {/* <ProfileFunctional name={"Srishti Malhotra learning Functional Components"} /> */}
+        </div>
       </div>
     );
   }
 }
 
-export default About;
+export default About2;
 
 // If you want to import the Profile component in the About component without using Outlet, you can do so by importing the Profile component in the About component and rendering it as a child component. Here is an example:
 /*

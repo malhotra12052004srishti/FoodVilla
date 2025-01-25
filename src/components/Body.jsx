@@ -72,11 +72,11 @@ const Body = () => {
 
   const offline = useOffline();
   if(offline){
-    return <h1>Offline, Please check your internet connection!!!</h1>
+    return <h1 className="text-red-500 text-center mt-5">Offline, Please check your internet connection!!!</h1>
   }
 
   if (!allRestaurants) {
-    return <h1>OOPS!!! There are no restaurants.</h1>;
+    return <h1 className="text-center mt-5">OOPS!!! There are no restaurants.</h1>;
   }
 
   // return allRestaurants.length === 0 ? (
@@ -127,16 +127,16 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="flex justify-center border border-blue-300 rounded-md p-5 bg-blue-100 my-5 shadow-md">
         <input
           type="text"
-          className="search-input"
+          className="bg-amber-50 m-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Search"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
         <button
-          className="search-btn"
+          className="bg-blue-500 hover:bg-blue-600 text-white p-2 m-2 rounded-md transition duration-200"
           onClick={() => {
             const data = filterData(searchInput, allRestaurants);
             setFilteredRestaurants(data);
@@ -146,18 +146,19 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="restaurant-list">
+      <div className="flex flex-wrap justify-center bg-blue-300 p-5">
         {filteredRestaurants?.length > 0 ? (
           filteredRestaurants.map((restaurant) => (
             <Link
               to={"/restaurant/" + restaurant.info.id}
               key={restaurant.info.id}
+              className="m-2"
             >
               <RestaurantCard {...restaurant.info} />
             </Link>
           ))
         ) : (
-          <h1>No Restaurants match your Search</h1>
+          <h1 className="text-center w-full mt-5">No Restaurants match your Search</h1>
         )}
       </div>
     </>
