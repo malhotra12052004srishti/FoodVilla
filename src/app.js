@@ -17,7 +17,7 @@
  *   CopyRight
  */
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -29,6 +29,14 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/ProfileFunctional";
 import ProfileClass from "./components/ProfileClass";
+import Shimmer from "./components/Shimmer";
+
+// We will not import Instamart like this as we are splitting the code.
+// import Instamart from "./components/Instamart";
+
+// Importing instamart dynamically using lazy which is for lazy loading
+const Instamart = lazy(() => import("./components/Instamart"));
+// Upon On Demand Loading -> Upon render -> Suspend the loading
 
 const AppLayout = () => {
   return (
@@ -68,6 +76,15 @@ const appRouter = createBrowserRouter([
         path: "/restaurant/:id",
         // path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          // "fallback" can be anything. It could be an <h1> tag also
+          <Suspense fallback = {<Shimmer />}>
+            <Instamart />
+          </Suspense>
+        ),
       },
     ],
   },

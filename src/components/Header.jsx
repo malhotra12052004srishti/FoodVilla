@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import useOffline from "../utils/useOffline";
 
 const loggedInUser = () => {
   // API call to authenticate the user
@@ -20,6 +21,7 @@ const Title = () => (
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isOffline = useOffline();
   const title = "Food Villa";
   // const [title, setTitle] = useState("FoodVilla");
   return (
@@ -49,6 +51,9 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
+          <li>
+            <Link to="/instamart">Instamart</Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>
@@ -63,8 +68,9 @@ const Header = () => {
 
             But you can do this thing here in the React as it is a JS Expression
               ((a=10), console.log(a));
-             */}
+      */}
 
+      <h1>{isOffline ? "❌" : "✔️"}</h1>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>LogOut</button>
       ) : (

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constant";
 import Shimmer from "./Shimmer";
+import useRestaurant from "../utils/useRestaurant";
 
 const RestaurantMenu = () => {
   // How to read the parameters from the dynamic URL
@@ -12,23 +13,10 @@ const RestaurantMenu = () => {
   // For destructuring the object. This will work same as the above code
   // const {id} = useParams();
 
-  const [restaurant, setRestaurant] = useState(null);
+  // const [restaurant, setRestaurant] = useState(null);
 
-  useEffect(() => {
-    getRestaurantInfo();
-  }, [id]);
-
-  async function getRestaurantInfo() {
-    const data = await fetch(
-        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=30.900965&lng=75.8572758&restaurantId="+id+"&catalog_qa=undefined&submitAction=ENTER"
-    );
-    if(!data.ok){
-        console.error("Error fetching data: ", data.statusText);
-    }
-    const json = await data.json();
-    console.log(json.data);
-    setRestaurant(json.data);
-  }
+  // Maintaing and Cleaning up the code. Doesn't need to maintain the separate state for this variable "useRestaurant" hook is maintaining that state.
+  const restaurant = useRestaurant(id);
 
   if (!restaurant) {
     return <Shimmer />;
@@ -49,7 +37,7 @@ const RestaurantMenu = () => {
         />
         <h3>{restaurant?.cards[2]?.card?.card?.info?.areaName}</h3>
         <h3>{restaurant?.cards[2]?.card?.card?.info?.city}</h3>
-        <h3>{restaurant?.cards[2]?.card?.card?.info?.avgRating}</h3>
+        <h3>{restaurant?.cards[2]?.card?.card?.info?.avgRating + " stars"}</h3>
         <h3>{restaurant?.cards[2]?.card?.card?.info?.costForTwoMessage}</h3>
       </div>
       <div>
