@@ -1,6 +1,7 @@
 // Profile Component using Class Based Component
 
 import React from "react";
+import userContext from "../utils/UserContext";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -70,6 +71,18 @@ class Profile extends React.Component {
           SetCount
         </button>
         <h4>Count2: {this.state.count2}</h4> */}
+
+        {/* As we are not having hooks in the class based components. So we cannot use the Hooks here. That's why we are passing it like the component*/}
+
+        <h2>Using userContext in Class Components</h2>
+        <userContext.Consumer>
+          {/* {(value) => console.log(value)} */}
+          {({ user }) => (
+            <h4>
+              {user.name} - {user.email}
+            </h4>
+          )}
+        </userContext.Consumer>
       </div>
     );
   }
@@ -112,17 +125,17 @@ export default Profile;
  */
 
 /**
- * 
+ *
  * Lifecycle Methods in the Class Components and the Functional Components:
- * 
+ *
  * Difference in the functional and the class components:
- * 
+ *
  * For the functional Components:
  *
  * useEffect(() => {
  *  API Call
  * }, [count, count2]);
- * 
+ *
  * If we use more than 1 useEffect in the functional components then multiple useEffect will be called for each of the useEffects.
  *
  *
@@ -132,6 +145,6 @@ export default Profile;
  *   if (prevState.count !== this.state.count || prevState.count2 !== this.state.count2) {
  *     code
  * }
- * 
+ *
  * In the class components, we can use the componentDidUpdate to check if the state has changed or not. We have to use multiple if statements to check if the state has changed or not.
  */

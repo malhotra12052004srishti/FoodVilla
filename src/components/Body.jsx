@@ -1,10 +1,11 @@
 import restaurantList from "./RestaurantList";
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOffline from "../utils/useOffline";
+import userContext from "../utils/UserContext";
 
 // function filterData(searchInput, restaurants) {
 //   const filterData = restaurants.filter((a) =>
@@ -17,6 +18,7 @@ const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const { user, setUser } = useContext(userContext);
 
   // Empty dependency array "[]" => once after the initial render.
   // dependency array is [searchInput] => once after initial render + everytime after render(my searchInput changes).
@@ -144,6 +146,23 @@ const Body = () => {
         >
           Search
         </button>
+
+        <input value={user.name} onChange={e => {
+          setUser({
+            ...user,
+            name: e.target.value,
+          })
+        }}></input>
+        
+        <input value={user.email} onChange={
+          e => {
+            setUser({
+              ...user,
+              email: e.target.value
+            })
+          }
+        }></input>
+
       </div>
 
       <div className="flex flex-wrap justify-center bg-blue-300 p-5">

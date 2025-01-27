@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import useOffline from "../utils/useOffline";
+import userContext from "../utils/UserContext";
 
 const loggedInUser = () => {
   // API call to authenticate the user
@@ -24,6 +25,9 @@ const Header = () => {
   const isOffline = useOffline();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [title, setTitle] = useState("FoodVilla");
+
+  const { user } = useContext(userContext);
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-center bg-blue-300 shadow-lg p-4">
       <Title />
@@ -86,6 +90,7 @@ const Header = () => {
         <h1 className={`text-2xl ${isOffline ? "text-red-500" : "text-green-500"}`}>
           {/* {isOffline ? "❌" : "✔️"} */}
         </h1>
+        {user.name}
         {isLoggedIn ? (
           <button 
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors" 

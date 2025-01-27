@@ -17,7 +17,7 @@
  *   CopyRight
  */
 
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useState, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -30,6 +30,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/ProfileFunctional";
 import ProfileClass from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
+import userContext from "./utils/UserContext";
 
 // We will not import Instamart like this as we are splitting the code.
 // import Instamart from "./components/Instamart";
@@ -39,17 +40,24 @@ const Instamart = lazy(() => import("./components/Instamart"));
 // Upon On Demand Loading -> Upon render -> Suspend the loading
 
 const AppLayout = () => {
-
   const [user, setUser] = useState({
-    name: "Srishti Malhotra",
+    name: "Raman Malhotra",
     email: "malhotra.srishti2004@gmail.com",
   });
 
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer user={user}/>
+      {/* This is just for overriding the default value which we have used in userContext */}
+      <userContext.Provider
+        value={{
+          user: user,
+          setUser: setUser,
+        }}
+      >
+        <Header />
+        <Outlet />
+        <Footer user={user} />
+      </userContext.Provider>
     </>
   );
 };
@@ -87,7 +95,7 @@ const appRouter = createBrowserRouter([
         path: "/instamart",
         element: (
           // "fallback" can be anything. It could be an <h1> tag also
-          <Suspense fallback = {<Shimmer />}>
+          <Suspense fallback={<Shimmer />}>
             <Instamart />
           </Suspense>
         ),
