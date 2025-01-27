@@ -1,7 +1,7 @@
 import { IMG_CDN_URL } from "../constant";
 
 const RestaurantCard = ({
-    name, cuisines, cloudinaryImageId, avgRating, costForTwoString}
+    name, cuisines, cloudinaryImageId, avgRating, costForTwoString, areaName, locality}
   ) => {
       return (
         <div className="w-[250px] h-[420px] p-4 my-5 mx-4 shadow-lg bg-blue-100 hover:bg-amber-50 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
@@ -18,6 +18,8 @@ const RestaurantCard = ({
           </h4>
           <h4 className="text-gray-500">{costForTwoString}</h4>
         </div>
+          <h4 className="text-gray-500">{locality}</h4>
+          <h4 className="text-gray-500">{areaName}</h4>
       </div>
       );
   };

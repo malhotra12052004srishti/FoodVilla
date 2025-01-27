@@ -37,4 +37,5 @@ export default useRestaurant;
  * 
  * useParams: It is a hook that allows you to access the parameters from the dynamic URL in React Router. You can use it to get the id or any other parameter from the URL.
  * 
+ * useLocation(): This hook is used to access the current URL.
  */

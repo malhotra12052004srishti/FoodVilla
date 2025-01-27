@@ -17,7 +17,7 @@
  *   CopyRight
  */
 
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -39,11 +39,17 @@ const Instamart = lazy(() => import("./components/Instamart"));
 // Upon On Demand Loading -> Upon render -> Suspend the loading
 
 const AppLayout = () => {
+
+  const [user, setUser] = useState({
+    name: "Srishti Malhotra",
+    email: "malhotra.srishti2004@gmail.com",
+  });
+
   return (
     <>
       <Header />
       <Outlet />
-      <Footer />
+      <Footer user={user}/>
     </>
   );
 };
