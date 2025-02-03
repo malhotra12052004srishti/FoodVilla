@@ -3,6 +3,7 @@ import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import useOffline from "../utils/useOffline";
 import userContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const loggedInUser = () => {
   // API call to authenticate the user
@@ -27,6 +28,8 @@ const Header = () => {
   // const [title, setTitle] = useState("FoodVilla");
 
   const { user } = useContext(userContext);
+  const cartItems = useSelector(store => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center bg-blue-300 shadow-lg p-4">
@@ -69,7 +72,7 @@ const Header = () => {
             <Link to="/instamart">Instamart</Link>
           </li>
           <li className="text-white hover:text-blue-500 transition-colors">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">Cart - {cartItems.length} Items</Link>
           </li>
         </ul>
       </div>
@@ -86,21 +89,25 @@ const Header = () => {
               ((a=10), console.log(a));
       */}
 
-<div className="flex items-center space-x-4 mt-4 md:mt-0">
-        <h1 className={`text-2xl ${isOffline ? "text-red-500" : "text-green-500"}`}>
+      <div className="flex items-center space-x-4 mt-4 md:mt-0">
+        <h1
+          className={`text-2xl ${
+            isOffline ? "text-red-500" : "text-green-500"
+          }`}
+        >
           {/* {isOffline ? "❌" : "✔️"} */}
         </h1>
         {user.name}
         {isLoggedIn ? (
-          <button 
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors" 
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
             onClick={() => setIsLoggedIn(false)}
           >
             LogOut
           </button>
         ) : (
-          <button 
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors" 
+          <button
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
             onClick={() => setIsLoggedIn(true)}
           >
             Login

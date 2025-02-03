@@ -31,6 +31,9 @@ import Profile from "./components/ProfileFunctional";
 import ProfileClass from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
 import userContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 // We will not import Instamart like this as we are splitting the code.
 // import Instamart from "./components/Instamart";
@@ -48,16 +51,18 @@ const AppLayout = () => {
   return (
     <>
       {/* This is just for overriding the default value which we have used in userContext */}
-      <userContext.Provider
-        value={{
-          user: user,
-          setUser: setUser,
-        }}
-      >
-        <Header />
-        <Outlet />
-        <Footer user={user} />
-      </userContext.Provider>
+      <Provider store={store}>
+        <userContext.Provider
+          value={{
+            user: user,
+            setUser: setUser,
+          }}
+        >
+          <Header />
+          <Outlet />
+          <Footer user={user} />
+        </userContext.Provider>
+      </Provider>
     </>
   );
 };
@@ -99,6 +104,10 @@ const appRouter = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

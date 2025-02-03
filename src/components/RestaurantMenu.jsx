@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constant";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const RestaurantMenu = () => {
   // How to read the parameters from the dynamic URL
@@ -17,6 +19,15 @@ const RestaurantMenu = () => {
 
   // Maintaing and Cleaning up the code. Doesn't need to maintain the separate state for this variable "useRestaurant" hook is maintaining that state.
   const restaurant = useRestaurant(id);
+
+  const dispatch = useDispatch();
+  const handleAddItem = () => {
+    dispatch(addItem("Grapes")); // {payload: "Grapes"}
+  };
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   if (!restaurant) {
     return <Shimmer />;
@@ -54,6 +65,16 @@ const RestaurantMenu = () => {
             {restaurant?.cards[2]?.card?.card?.info?.description}
           </p>
         </div>
+
+        {/* <div>
+          <button
+            className="p-2 m-5 bg-green-100 cursor-pointer"
+            onClick={() => handleAddItem()}
+          >
+            + Add Item
+          </button>
+        </div> */}
+
         <div className="bg-white shadow-md rounded-lg p-5">
           <h1 className="text-2xl font-bold mb-4">Menu</h1>
           <ul className="space-y-2">
@@ -69,7 +90,13 @@ const RestaurantMenu = () => {
                   key={index}
                   className="bg-blue-100 p-2 rounded-md shadow-sm"
                 >
-                  {item.card.card.title}
+                  {item.card.card.title}{" "}
+                  <button
+                    className="p-2 m-5 bg-green-100 cursor-pointer"
+                    onClick={() => addFoodItem(item)}
+                  >
+                    + Add Item
+                  </button>
                 </li>
               ))
             ) : (
