@@ -132,7 +132,7 @@ const Body = () => {
       <div className="flex justify-center border border-blue-300 rounded-md p-5 bg-blue-100 my-5 shadow-md">
         <input
           type="text"
-          className="bg-amber-50 m-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="bg-amber-50 m-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-100"
           placeholder="Search a restaurant you want..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
@@ -146,22 +146,22 @@ const Body = () => {
         >
           Search
         </button>
-
+{/* 
         <input value={user.name} onChange={e => {
           setUser({
             ...user,
             name: e.target.value,
           })
-        }}></input>
+        }}></input> */}
         
-        <input value={user.email} onChange={
+        {/* <input value={user.email} onChange={
           e => {
             setUser({
               ...user,
               email: e.target.value
             })
           }
-        }></input>
+        }></input> */}
 
       </div>
 

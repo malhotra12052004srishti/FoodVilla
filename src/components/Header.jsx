@@ -97,7 +97,7 @@ const Header = () => {
         >
           {/* {isOffline ? "❌" : "✔️"} */}
         </h1>
-        {user.name}
+        {/* {user.name} */}
         {isLoggedIn ? (
           <button
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
