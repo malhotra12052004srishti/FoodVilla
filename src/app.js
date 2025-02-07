@@ -43,6 +43,7 @@ const Instamart = lazy(() => import("./components/Instamart"));
 // Upon On Demand Loading -> Upon render -> Suspend the loading
 
 const AppLayout = () => {
+  console.log("AppLayout Rendering...")
   const [user, setUser] = useState({
     name: "Raman Malhotra",
     email: "malhotra.srishti2004@gmail.com",
@@ -112,6 +113,8 @@ const appRouter = createBrowserRouter([
     ],
   },
 ]);
+
+// console.log("Rendering App... ");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);
