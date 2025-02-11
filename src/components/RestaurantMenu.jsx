@@ -77,7 +77,7 @@ const RestaurantMenu = () => {
 
         <div className="bg-white shadow-md rounded-lg p-5">
           <h1 className="text-2xl font-bold mb-4">Menu</h1>
-          <ul className="space-y-2">
+          <ul data-testid="menu" className="space-y-2">
             {restaurant?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards ? (
               Object.values(
                 restaurant.cards[4].groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
@@ -92,6 +92,7 @@ const RestaurantMenu = () => {
                 >
                   {item.card.card.title}{" "}
                   <button
+                    data-testid="addBtn"
                     className="p-2 m-5 bg-green-100 cursor-pointer"
                     onClick={() => addFoodItem(item)}
                   >

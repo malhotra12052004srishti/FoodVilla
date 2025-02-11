@@ -73,12 +73,18 @@ const Body = () => {
   console.log("Length", allRestaurants.length);
 
   const offline = useOffline();
-  if(offline){
-    return <h1 className="text-red-500 text-center mt-5">Offline, Please check your internet connection!!!</h1>
+  if (offline) {
+    return (
+      <h1 className="text-red-500 text-center mt-5">
+        Offline, Please check your internet connection!!!
+      </h1>
+    );
   }
 
   if (!allRestaurants) {
-    return <h1 className="text-center mt-5">OOPS!!! There are no restaurants.</h1>;
+    return (
+      <h1 className="text-center mt-5">OOPS!!! There are no restaurants.</h1>
+    );
   }
 
   // return allRestaurants.length === 0 ? (
@@ -131,6 +137,7 @@ const Body = () => {
     <>
       <div className="flex justify-center border border-blue-300 rounded-md p-5 bg-blue-100 my-5 shadow-md">
         <input
+          data-testid="search-input"
           type="text"
           className="bg-amber-50 m-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-100"
           placeholder="Search a restaurant you want..."
@@ -138,6 +145,7 @@ const Body = () => {
           onChange={(e) => setSearchInput(e.target.value)}
         />
         <button
+          data-testid="search-btn"
           className="bg-blue-500 hover:bg-blue-600 text-white p-2 m-2 rounded-md transition duration-200"
           onClick={() => {
             const data = filterData(searchInput, allRestaurants);
@@ -146,14 +154,14 @@ const Body = () => {
         >
           Search
         </button>
-{/* 
+        {/* 
         <input value={user.name} onChange={e => {
           setUser({
             ...user,
             name: e.target.value,
           })
         }}></input> */}
-        
+
         {/* <input value={user.email} onChange={
           e => {
             setUser({
@@ -162,10 +170,12 @@ const Body = () => {
             })
           }
         }></input> */}
-
       </div>
 
-      <div className="flex flex-wrap justify-center bg-blue-300 p-5">
+      <div
+        className="flex flex-wrap justify-center bg-blue-300 p-5"
+        data-testid="res-list"
+      >
         {filteredRestaurants?.length > 0 ? (
           filteredRestaurants.map((restaurant) => (
             <Link
@@ -177,7 +187,9 @@ const Body = () => {
             </Link>
           ))
         ) : (
-          <h1 className="text-center w-full mt-5">No Restaurants match your Search</h1>
+          <h1 className="text-center w-full mt-5">
+            No Restaurants match your Search
+          </h1>
         )}
       </div>
     </>

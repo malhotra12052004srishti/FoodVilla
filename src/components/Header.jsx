@@ -13,6 +13,7 @@ const loggedInUser = () => {
 const Title = () => (
   <a href="/">
     <img
+      data-testid="logo"
       className="h-28 p-2 transition-transform duration-300 hover:scale-105"
       alt="logo"
       // src="https://yt3.ggpht.com/ytc/AKedOLSpK3T_2RxkMYb-pk9oENQB0NvYpeOdXRgQe8i5=s800-c-k-c0x00ffffff-no-rj"
@@ -28,7 +29,7 @@ const Header = () => {
   // const [title, setTitle] = useState("FoodVilla");
 
   const { user } = useContext(userContext);
-  const cartItems = useSelector(store => store.cart.items);
+  const cartItems = useSelector((store) => store.cart.items);
   console.log(cartItems);
 
   return (
@@ -71,7 +72,10 @@ const Header = () => {
           <li className="text-white hover:text-blue-500 transition-colors">
             <Link to="/instamart">Instamart</Link>
           </li>
-          <li className="text-white hover:text-blue-500 transition-colors">
+          <li
+            data-testid="cart"
+            className="text-white hover:text-blue-500 transition-colors"
+          >
             <Link to="/cart">Cart - {cartItems.length} Items</Link>
           </li>
         </ul>
@@ -91,11 +95,12 @@ const Header = () => {
 
       <div className="flex items-center space-x-4 mt-4 md:mt-0">
         <h1
+          data-testid="online-status"
           className={`text-2xl ${
             isOffline ? "text-red-500" : "text-green-500"
           }`}
         >
-          {/* {isOffline ? "❌" : "✔️"} */}
+          {isOffline ? "❌" : "✔️"}
         </h1>
         {/* {user.name} */}
         {isLoggedIn ? (

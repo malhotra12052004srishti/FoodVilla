@@ -3,7 +3,7 @@ import "./Shimmer.css";
 
 const Shimmer = () => {
   return (
-    <div className="restraunt-list">
+    <div className="restraunt-list" data-testid="shimmer">
       {Array(12)
         .fill("")
         .map((e, index) => (

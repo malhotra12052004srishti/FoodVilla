@@ -1,1 +1,11 @@
-{}
+{
+  "presets": [
+    ["@babel/preset-env", { "targets": { "node": "current" } }],
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
+
+// Firstly we used this file to remove our console logs
+// Similarly we will use this for making our js file understand the import or the other things as it doesn't understand it by default
+
+// Difference b/w json and a Javascript object?
